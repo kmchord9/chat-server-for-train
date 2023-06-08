@@ -28,7 +28,8 @@
       var messages = document.getElementById('messages');
       var form = document.getElementById('form');
       var input = document.getElementById('input');
-
+      var event = new Event( "submit", {"bubbles":true, "cancelable":true});
+      
       form.addEventListener('submit', function(e) {
         e.preventDefault();
         if (input.value) {
@@ -37,6 +38,13 @@
         }
       });
 
+      form.addEventListener('keydown', function(e) {
+        if ( e.keyCode === 13 && e.shiftKey ) {         
+          this.dispatchEvent(event);
+          e.preventDefault();
+          console.log('shift+enter');
+        }
+      })
       socket.on('chat message', function(msg) {
         var item = document.createElement('li');
         var regexp_url = /(https?:\/\/[\w/:%#\$&\?\(\)~\.=\+\-]+)/g;
