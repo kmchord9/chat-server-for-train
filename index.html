@@ -167,16 +167,28 @@
         usernameElem.textContent = username;
 
         //message
-        var regexp_url = /(https?:\/\/[\w/:%#\$&\?\(\)~\.=\+\-]+)/g;
-        msgUrl = msg.replace(regexp_url, '<a href="$1">$1</a>');
         var messageElem = document.createElement('div');
         messageElem.className = 'fukidasi left'; 
         messageElem.textContent = msg;
-        
-        //add elem
+
+        //add elem              
         elem.appendChild(usernameElem);
         elem.appendChild(messageElem);
 
+        //url
+        var regexp_url = /(https?:\/\/[\w/:%#\$&\?\(\)~\.=\+\-]+)/g;
+        msgUrl = msg.match(regexp_url);
+
+        if (msgUrl) {
+          console.log(msgUrl)
+          msgUrl.forEach(element => {
+            var urlElem = document.createElement('div');
+            urlElem.className = 'fukidasi left';
+            urlElem.innerHTML = `<a href="${element}">${element}</a>`;  
+            elem.appendChild(urlElem);        
+          });
+        }
+        
         return;
       }
     </script>
