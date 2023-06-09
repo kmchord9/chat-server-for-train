@@ -140,20 +140,12 @@
         if ( e.keyCode === 13 && e.shiftKey ) {         
           this.dispatchEvent(event);
           e.preventDefault();
-          console.log('shift+enter');
+          //console.log('shift+enter');
         }
       })
       socket.on('chat message', function(msg) {       
         var username = document.getElementById('username').value;
         addMessageElem(messages, username, msg);
-        //var itemUser = document.createElement('h5');
-        //var item = document.createElement('li');
-        //var regexp_url = /(https?:\/\/[\w/:%#\$&\?\(\)~\.=\+\-]+)/g;
-        //msg = msg.replace(regexp_url, '<a href="$1">$1</a>');
-        //itemUser.textContent = name;
-        //item.textContent = msg;
-        //messages.appendChild(itemUser);
-        //messages.appendChild(item);
         window.scrollTo(0, document.body.scrollHeight);
       });
 
