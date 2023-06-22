@@ -123,15 +123,20 @@
     <script>
       var socket = io();
 
-      var messages = document.getElementsByClassName('kaiwa line')[0];
+      var messagesElem = document.getElementsByClassName('kaiwa line')[0];
       var form = document.getElementById('form');
       var textarea = document.getElementById('textarea');
       var event = new Event( "submit", {"bubbles":true, "cancelable":true});
 
       form.addEventListener('submit', function(e) {
+        var username = document.getElementById('username').value;
         e.preventDefault();
         if (textarea.value) {
-          socket.emit('chat message', textarea.value);
+          var post = {
+            text: textarea.value,
+            name: username
+          }          
+          socket.emit('chat message', post);
           textarea.value = '';
         }
       });
@@ -145,7 +150,7 @@
       })
       socket.on('chat message', function(msg) {       
         var username = document.getElementById('username').value;
-        addMessageElem(messages, username, msg);
+        addMessageElem(messagesElem, msg.name, msg.text);
         window.scrollTo(0, document.body.scrollHeight);
       });
 
