@@ -8,5 +8,7 @@ services:
       - ./volume/node:/home/node/work
     ports:
       - 9200:3000
+    command: /bin/bsh -c "node /home/node/work/index.js"
+    user: node
     restart: always
     tty: true
